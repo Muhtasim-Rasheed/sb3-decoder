@@ -2,6 +2,10 @@
 name = "sb3-decoder"
 version = "0.1.0"
 edition = "2024"
+authors = ["Muhtasim Noor Al Rasheed <mutasimos5101@gmail.com>"]
+description = "A Rust library for decoding Scratch 3.0 project files (.sb3)"
+license = "MIT"
+repository = "https://github.com/Muhtasim-Rasheed/sb3-decoder"
 
 [dependencies]
 serde = { version = "1.0.219", features = ["serde_derive"] }
