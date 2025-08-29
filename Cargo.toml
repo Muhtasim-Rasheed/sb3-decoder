@@ -1,0 +1,20 @@
+[package]
+name = "sb3-decoder"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+serde = { version = "1.0.219", features = ["serde_derive"] }
+serde_json = "1.0.143"
+thiserror = "2.0.16"
+zip = "4.5.0"
+image = { version = "0.25", optional = true }
+usvg = { version = "0.45", optional = true }
+resvg = { version = "0.45", optional = true }
+indexmap = "2.11.0"
+hound = "3.5.1"
+
+[features]
+default = ["costume_png"]
+costume_png = ["dep:image", "dep:resvg"]
+costume_svg = ["dep:usvg"]
