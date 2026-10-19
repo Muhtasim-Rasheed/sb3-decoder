@@ -6,7 +6,7 @@ use resvg::usvg::Tree;
 
 fn pixmap_to_dynamic_image(pixmap: &Pixmap) -> DynamicImage {
     let mut buf = Vec::with_capacity(pixmap.data().len());
-    for chunk in pixmap.data().chunks_exact(4) {
+    for chunk in pixmap.data().as_chunks::<4>().0 {
         let (r, g, b, a) = (chunk[0], chunk[1], chunk[2], chunk[3]);
         if a > 0 {
             let alpha = a as f32 / 255.0;
@@ -30,6 +30,6 @@ pub fn rasterize_svg_to_png(
 ) -> Result<DynamicImage, String> {
     let mut pixmap =
         Pixmap::new(width, height).ok_or_else(|| "Failed to create pixmap".to_string())?;
-    resvg::render(&svg_tree, Transform::default(), &mut pixmap.as_mut());
+    resvg::render(svg_tree, Transform::default(), &mut pixmap.as_mut());
     Ok(pixmap_to_dynamic_image(&pixmap))
 }

@@ -182,14 +182,32 @@ fn block_decode_test() {
     // Decode scripts
     assert_eq!(sprite.scripts.len(), 2);
     assert_eq!(sprite.scripts[0].len(), 4);
-    assert_eq!(sprite.scripts[0][0].opcode, Opcode::Events(EventsOpcode::WhenFlagClicked));
-    assert_eq!(sprite.scripts[0][1].opcode, Opcode::Data(DataOpcode::AddToList));
-    assert_eq!(sprite.scripts[0][2].opcode, Opcode::Motion(MotionOpcode::MoveSteps));
-    assert_eq!(sprite.scripts[0][3].opcode, Opcode::Events(EventsOpcode::Broadcast));
-    assert!( matches!( sprite.scripts[0][1].inputs["ITEM"].value, InputValue::Block( _ ) ) );
+    assert_eq!(
+        sprite.scripts[0][0].opcode,
+        Opcode::Events(EventsOpcode::WhenFlagClicked)
+    );
+    assert_eq!(
+        sprite.scripts[0][1].opcode,
+        Opcode::Data(DataOpcode::AddToList)
+    );
+    assert_eq!(
+        sprite.scripts[0][2].opcode,
+        Opcode::Motion(MotionOpcode::MoveSteps)
+    );
+    assert_eq!(
+        sprite.scripts[0][3].opcode,
+        Opcode::Events(EventsOpcode::Broadcast)
+    );
+    assert!(matches!(
+        sprite.scripts[0][1].inputs["ITEM"].value,
+        InputValue::Block(_)
+    ));
     let sub_block = match sprite.scripts[0][1].inputs["ITEM"].value {
         InputValue::Block(ref b) => *b.clone(),
         _ => panic!("Expected a block"),
     };
-    assert!( matches!( sub_block.opcode, Opcode::Operators(OperatorsOpcode::Random ) ) );
+    assert!(matches!(
+        sub_block.opcode,
+        Opcode::Operators(OperatorsOpcode::Random)
+    ));
 }

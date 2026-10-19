@@ -10,7 +10,7 @@ use zip::ZipArchive;
 use crate::{
     decoder::{RawSprite, RawStage, RawTarget},
     error::DecodeError,
-    structs::{decode_scripts, Costume, List, Script, Sound, Variable},
+    structs::{Costume, List, Script, Sound, Variable, decode_scripts},
 };
 
 /// The [`Target`] enum represents either a sprite or the stage in a Scratch 3.0 project.
@@ -92,15 +92,16 @@ impl Sprite {
     ) -> Result<Self, DecodeError> {
         let variables = raw
             .variables
-            .into_iter()
-            .map(|(_, raw_var)| (raw_var.name.clone(), Variable(raw_var.value.into())))
+            .into_values()
+            .map(|raw_var| (raw_var.name.clone(), Variable(raw_var.value.into())))
             .collect();
         #[cfg(feature = "costume_png")]
         let costumes = raw
             .costumes
             .into_iter()
             .map(|raw| {
-                let mut file = zip.by_name(&raw.md5ext)
+                let mut file = zip
+                    .by_name(&raw.md5ext)
                     .map_err(|_| DecodeError::NotFound(raw.md5ext.clone()))?;
                 let mut buffer = Vec::new();
                 std::io::copy(&mut file, &mut buffer)?;
@@ -138,7 +139,8 @@ impl Sprite {
             .costumes
             .into_iter()
             .map(|raw| {
-                let mut file = zip.by_name(&raw.md5ext)
+                let mut file = zip
+                    .by_name(&raw.md5ext)
                     .map_err(|_| DecodeError::NotFound(raw.md5ext.clone()))?;
                 let mut buffer = Vec::new();
                 std::io::copy(&mut file, &mut buffer)?;
@@ -164,7 +166,8 @@ impl Sprite {
             .sounds
             .into_iter()
             .map(|raw| {
-                let mut file = zip.by_name(&raw.md5ext)
+                let mut file = zip
+                    .by_name(&raw.md5ext)
                     .map_err(|_| DecodeError::NotFound(raw.md5ext.clone()))?;
                 let mut buffer = Vec::new();
                 std::io::copy(&mut file, &mut buffer)?;
@@ -189,8 +192,8 @@ impl Sprite {
             .collect::<Result<HashMap<String, Sound>, DecodeError>>()?;
         let lists = raw
             .lists
-            .into_iter()
-            .map(|(_, raw_list)| {
+            .into_values()
+            .map(|raw_list| {
                 (
                     raw_list.0.clone(),
                     List(raw_list.1.iter().map(|v| v.clone().into()).collect()),
@@ -275,15 +278,16 @@ impl Stage {
     ) -> Result<Self, DecodeError> {
         let variables = raw
             .variables
-            .into_iter()
-            .map(|(_, raw_var)| (raw_var.name.clone(), Variable(raw_var.value.into())))
+            .into_values()
+            .map(|raw_var| (raw_var.name.clone(), Variable(raw_var.value.into())))
             .collect();
         #[cfg(feature = "costume_png")]
         let backdrops = raw
             .backdrops
             .into_iter()
             .map(|raw| {
-                let mut file = zip.by_name(&raw.md5ext)
+                let mut file = zip
+                    .by_name(&raw.md5ext)
                     .map_err(|_| DecodeError::NotFound(raw.md5ext.clone()))?;
                 let mut buffer = Vec::new();
                 std::io::copy(&mut file, &mut buffer)?;
@@ -321,7 +325,8 @@ impl Stage {
             .backdrops
             .into_iter()
             .map(|raw| {
-                let mut file = zip.by_name(&raw.md5ext)
+                let mut file = zip
+                    .by_name(&raw.md5ext)
                     .map_err(|_| DecodeError::NotFound(raw.md5ext.clone()))?;
                 let mut buffer = Vec::new();
                 std::io::copy(&mut file, &mut buffer)?;
@@ -347,7 +352,8 @@ impl Stage {
             .sounds
             .into_iter()
             .map(|raw| {
-                let mut file = zip.by_name(&raw.md5ext)
+                let mut file = zip
+                    .by_name(&raw.md5ext)
                     .map_err(|_| DecodeError::NotFound(raw.md5ext.clone()))?;
                 let mut buffer = Vec::new();
                 std::io::copy(&mut file, &mut buffer)?;
@@ -372,8 +378,8 @@ impl Stage {
             .collect::<Result<HashMap<String, Sound>, DecodeError>>()?;
         let lists = raw
             .lists
-            .into_iter()
-            .map(|(_, raw_list)| {
+            .into_values()
+            .map(|raw_list| {
                 (
                     raw_list.0.clone(),
                     List(raw_list.1.iter().map(|v| v.clone().into()).collect()),
@@ -384,11 +390,7 @@ impl Stage {
         Ok(Self {
             variables,
             lists,
-            broadcasts: raw
-                .broadcasts
-                .into_iter()
-                .map(|(_, msg)| Broadcast(msg))
-                .collect(),
+            broadcasts: raw.broadcasts.into_values().map(Broadcast).collect(),
             scripts: decode_scripts(&raw.blocks)?,
             current_backdrop: raw.current_backdrop,
             backdrops,

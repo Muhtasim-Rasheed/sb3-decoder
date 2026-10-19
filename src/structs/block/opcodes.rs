@@ -45,7 +45,10 @@ impl std::str::FromStr for Opcode {
     fn from_str(input: &str) -> Result<Self, Self::Err> {
         let parts: Vec<&str> = input.splitn(2, '_').collect();
         if parts.len() != 2 {
-            return Err(DecodeError::InvalidData(format!("Invalid opcode format: {}", input)));
+            return Err(DecodeError::InvalidData(format!(
+                "Invalid opcode format: {}",
+                input
+            )));
         }
         let category = parts[0];
         match category {
@@ -58,7 +61,10 @@ impl std::str::FromStr for Opcode {
             "operator" => Ok(Opcode::Operators(input.parse()?)),
             "data" => Ok(Opcode::Data(input.parse()?)),
             "procedures" => Ok(Opcode::Procedures(input.parse()?)),
-            _ => Err(DecodeError::Unknown("opcode category".to_string(), category.to_string())),
+            _ => Err(DecodeError::Unknown(
+                "opcode category".to_string(),
+                category.to_string(),
+            )),
         }
     }
 }

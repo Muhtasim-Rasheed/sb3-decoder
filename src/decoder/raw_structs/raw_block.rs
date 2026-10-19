@@ -74,7 +74,8 @@ impl<'de> serde::Deserialize<'de> for RawBlockInput {
 
         let shadow = vec[0]
             .as_u64()
-            .ok_or_else(|| serde::de::Error::custom("Invalid shadow value"))? as u8;
+            .ok_or_else(|| serde::de::Error::custom("Invalid shadow value"))?
+            as u8;
 
         // Case 1: index 1 is a block ID (string)
         if let Some(block_id) = vec[1].as_str() {
@@ -93,13 +94,20 @@ impl<'de> serde::Deserialize<'de> for RawBlockInput {
 
             let kind = sub_vec[0]
                 .as_u64()
-                .ok_or_else(|| serde::de::Error::custom("Invalid type value"))? as u8;
+                .ok_or_else(|| serde::de::Error::custom("Invalid type value"))?
+                as u8;
 
             let value = sub_vec[1].clone();
 
-            return Ok(RawBlockInput { shadow, kind, value });
+            return Ok(RawBlockInput {
+                shadow,
+                kind,
+                value,
+            });
         }
 
-        Err(serde::de::Error::custom("Invalid RawBlockInput second element"))
+        Err(serde::de::Error::custom(
+            "Invalid RawBlockInput second element",
+        ))
     }
 }
