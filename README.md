@@ -6,14 +6,12 @@ It provides functionality to read and parse the contents of `.sb3` files, which 
 ## Todo
 
 - [ ] Add examples
-- [ ] Nicely support C-blocks
+- [x] Nicely support C-blocks
 - [ ] Simplify parts of the API
 - [ ] Add more documentation to the code
 
 ## Feature flags
+The features `costumes` and `sounds` are enabled by default.
 
-- `costume_png`: Rasterizes SVG costumes to PNG using `resvg`. Re-exports the `image` crate.
-- `costume_svg`: Parses SVG costumes using `usvg`. Re-exports the `usvg` crate.
-
-**Note**: Enabling both `costume_png` and `costume_svg` will cause a compile-time error. You must enable only one of them.\
-**Note**: Enabling none of these features will also cause a compile-time error. You must enable one of them.
+- `costumes`: costume decoding support, using image and resvg.
+- `sounds`: sound decoding support, using hound and nanomp3.

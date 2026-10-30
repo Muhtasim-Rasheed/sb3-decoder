@@ -1,0 +1,66 @@
+---
+source: src/tests/decode_projects.rs
+expression: decoded
+---
+Project {
+    sprites: [
+        Sprite {
+            name: "Sprite1",
+            scripts: [],
+            loose_reporters: [],
+            x: 0.0,
+            y: 0.0,
+            direction: 90.0,
+            rotation_style: AllAround,
+            draggable: false,
+            current_costume: 0,
+            costumes: [
+                Costume {
+                    name: "costume1",
+                    data_format: Svg,
+                    rotation_center_x: 30.74937882782359,
+                    rotation_center_y: 58.864768144346826,
+                    bitmap_resolution: 1.0,
+                    data_len: 2954,
+                },
+            ],
+            visible: true,
+            layer: 1,
+            size: 100.0,
+            sounds: [],
+            volume: 100.0,
+            variables: {},
+            lists: {},
+        },
+    ],
+    stage: Stage {
+        scripts: [],
+        loose_reporters: [],
+        current_backdrop: 0,
+        backdrops: [
+            Costume {
+                name: "backdrop1",
+                data_format: Svg,
+                rotation_center_x: 240.0,
+                rotation_center_y: 180.0,
+                bitmap_resolution: 1.0,
+                data_len: 202,
+            },
+        ],
+        sounds: [],
+        volume: 100.0,
+    },
+    global_variables: {
+        VarId(
+            "`jEk@4|i[#Fk?(8x)AV.-my variable",
+        ): Variable {
+            name: "my variable",
+            value: Number(
+                0.0,
+            ),
+            cloud: false,
+        },
+    },
+    global_lists: {},
+    broadcasts: {},
+}

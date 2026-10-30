@@ -1,11 +1,8 @@
-//! A prelude module to re-export commonly used items from the crate.
+//! Commonly used items that can be glob-imported like so:
+//!
+//! ```
+//! use sb3_decoder::prelude::*;
+//! ```
 
-pub use crate::decoder::{Decoder, DecoderBuilder};
-pub use crate::error::*;
-pub use crate::structs::*;
-
-#[cfg(feature = "costume_png")]
-pub use image;
-
-#[cfg(feature = "costume_svg")]
-pub use usvg;
+pub use crate::decode::Decoder;
+pub use crate::model::{Costume, Project, Sound, Sprite, Stage, code};

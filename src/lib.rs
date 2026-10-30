@@ -1,47 +1,52 @@
-//! # `sb3-decoder`
-//! A Rust library for decoding Scratch 3.0 project files (.sb3) into Rust structs.
+//! # sb3-decoder
+//! A Rust crate that decodes Scratch 3.0 project files (.sb3) into rust structs and enums.
 //!
 //! # Example
 //! ```no_run
 //! use sb3_decoder::prelude::*;
 //!
-//! let mut decoder = DecoderBuilder::new()
-//!     .use_file("path/to/project.sb3") // Open a file
-//! #   .use_bytes(&[]) /*
-//!     .use_bytes(include_bytes!("path/to/project.sb3")) // Or use bytes directly
-//! # */
-//!     .build()
-//!     .unwrap();
-//! let project = decoder.decode().unwrap();
+//! let mut decoder = {
+//!     let decoder = Decoder::from_file("project.sb3"); // Read from a file
+//!     # /* rust wouldn't be able to find project.sb3, so this part is commented out
+//!     let decoder = Decoder::from_bytes(include_bytes!("project.sb3")); // Or load from memory
+//!     # */
+//!     decoder.expect("project should be valid")
+//! };
+//!
+//! // Decode the project
+//! let project = decoder.decode().expect("project should be valid");
+//!
+//! // Now let's print every hat and action block we find inside the Cat sprite
+//! let cat = project
+//!     .sprites
+//!     .iter()
+//!     .find(|sprite| sprite.name == "Cat")
+//!     .expect("there should be a Cat sprite");
+//! for script in &cat.scripts {
+//!     println!("{:?}", script.hat);
+//!     for action in &script.actions {
+//!         println!("{action:?}");
+//!     }
+//! }
 //! ```
 //!
-//! # Features
-//! - `costume_png`: Enable support for rasterizing SVG costumes to PNG.
-//! - `costume_svg`: Enable support for handling SVG costumes directly.
+//! # Feature flags
+//! The features `costumes` and `sounds` are enabled by default.
 //!
-//! **Note:** The features `costume_png` and `costume_svg` are mutually exclusive; enable only one
-//! of them.
+//! - `costumes` - costume decoding support, using image and resvg.
+//! - `sounds` - sound decoding support, using hound and nanomp3.
 
-#[cfg(all(feature = "costume_png", feature = "costume_svg"))]
-compile_error!(
-    "Features `costume_png` and `costume_svg` are mutually exclusive; enable only one of them."
-);
-
-#[cfg(all(not(feature = "costume_png"), not(feature = "costume_svg")))]
-compile_error!("Either feature `costume_png` or `costume_svg` must be enabled.");
-
-pub mod decoder;
+pub mod decode;
 pub mod error;
-pub mod structs;
-pub(crate) mod utils;
-
+pub(crate) mod macros;
+pub mod model;
 pub mod prelude;
+pub(crate) mod raw;
 
-#[cfg(feature = "costume_png")]
-pub use image;
-
-#[cfg(feature = "costume_svg")]
-pub use usvg;
+pub use error::Error;
 
 #[cfg(test)]
-mod tests;
+mod tests {
+    mod decode_projects;
+    mod raw_deserialization;
+}

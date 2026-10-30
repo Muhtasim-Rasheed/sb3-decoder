@@ -1,0 +1,225 @@
+---
+source: src/tests/decode_projects.rs
+expression: decoded
+---
+Project {
+    sprites: [
+        Sprite {
+            name: "Sprite1",
+            scripts: [
+                Script {
+                    hat: None,
+                    actions: [
+                        SetVariableTo {
+                            var: VarId(
+                                "`jEk@4|i[#Fk?(8x)AV.-my variable",
+                            ),
+                            val: Text {
+                                text: "0",
+                            },
+                        },
+                        SetVariableTo {
+                            var: VarId(
+                                ",BNg;,(u/T;0WaViskN*",
+                            ),
+                            val: Text {
+                                text: "1",
+                            },
+                        },
+                        AddToList {
+                            list: ListId(
+                                "{K)sGN{K,2?+G(_LW`Q;",
+                            ),
+                            val: Text {
+                                text: "thing",
+                            },
+                        },
+                        Broadcast {
+                            broadcast: Broadcast {
+                                broadcast: BroadcastId(
+                                    "lg5mhk:RK`YXt*QI;vEX",
+                                ),
+                            },
+                        },
+                    ],
+                },
+            ],
+            loose_reporters: [
+                Variable {
+                    var: VarId(
+                        "`jEk@4|i[#Fk?(8x)AV.-my variable",
+                    ),
+                },
+                Variable {
+                    var: VarId(
+                        ",BNg;,(u/T;0WaViskN*",
+                    ),
+                },
+                List {
+                    list: ListId(
+                        "{K)sGN{K,2?+G(_LW`Q;",
+                    ),
+                },
+            ],
+            x: 0.0,
+            y: 0.0,
+            direction: 90.0,
+            rotation_style: AllAround,
+            draggable: false,
+            current_costume: 0,
+            costumes: [
+                Costume {
+                    name: "costume1",
+                    data_format: Svg,
+                    rotation_center_x: 30.74937882782359,
+                    rotation_center_y: 58.864768144346826,
+                    bitmap_resolution: 1.0,
+                    data_len: 2954,
+                },
+            ],
+            visible: true,
+            layer: 1,
+            size: 100.0,
+            sounds: [],
+            volume: 100.0,
+            variables: {
+                VarId(
+                    ",BNg;,(u/T;0WaViskN*",
+                ): Variable {
+                    name: "private1",
+                    value: Number(
+                        0.0,
+                    ),
+                    cloud: false,
+                },
+            },
+            lists: {},
+        },
+        Sprite {
+            name: "Sprite2",
+            scripts: [
+                Script {
+                    hat: None,
+                    actions: [
+                        SetVariableTo {
+                            var: VarId(
+                                "`jEk@4|i[#Fk?(8x)AV.-my variable",
+                            ),
+                            val: Text {
+                                text: "1",
+                            },
+                        },
+                        SetVariableTo {
+                            var: VarId(
+                                "lB@o6JYg{`,lur$oC6mt",
+                            ),
+                            val: Text {
+                                text: "0",
+                            },
+                        },
+                    ],
+                },
+                Script {
+                    hat: Some(
+                        WhenIReceive {
+                            broadcast: BroadcastId(
+                                "lg5mhk:RK`YXt*QI;vEX",
+                            ),
+                        },
+                    ),
+                    actions: [],
+                },
+            ],
+            loose_reporters: [
+                Variable {
+                    var: VarId(
+                        "lB@o6JYg{`,lur$oC6mt",
+                    ),
+                },
+                TouchingColor {
+                    color: Color {
+                        r: 182,
+                        g: 44,
+                        b: 35,
+                    },
+                },
+            ],
+            x: 36.0,
+            y: 28.0,
+            direction: 90.0,
+            rotation_style: AllAround,
+            draggable: false,
+            current_costume: 0,
+            costumes: [
+                Costume {
+                    name: "costume1",
+                    data_format: Svg,
+                    rotation_center_x: 0.0,
+                    rotation_center_y: 0.0,
+                    bitmap_resolution: 1.0,
+                    data_len: 200,
+                },
+            ],
+            visible: true,
+            layer: 2,
+            size: 100.0,
+            sounds: [],
+            volume: 100.0,
+            variables: {
+                VarId(
+                    "lB@o6JYg{`,lur$oC6mt",
+                ): Variable {
+                    name: "private2",
+                    value: Number(
+                        0.0,
+                    ),
+                    cloud: false,
+                },
+            },
+            lists: {},
+        },
+    ],
+    stage: Stage {
+        scripts: [],
+        loose_reporters: [],
+        current_backdrop: 0,
+        backdrops: [
+            Costume {
+                name: "backdrop1",
+                data_format: Svg,
+                rotation_center_x: 240.0,
+                rotation_center_y: 180.0,
+                bitmap_resolution: 1.0,
+                data_len: 202,
+            },
+        ],
+        sounds: [],
+        volume: 100.0,
+    },
+    global_variables: {
+        VarId(
+            "`jEk@4|i[#Fk?(8x)AV.-my variable",
+        ): Variable {
+            name: "my variable",
+            value: Number(
+                0.0,
+            ),
+            cloud: false,
+        },
+    },
+    global_lists: {
+        ListId(
+            "{K)sGN{K,2?+G(_LW`Q;",
+        ): List {
+            name: "my list",
+            values: [],
+        },
+    },
+    broadcasts: {
+        BroadcastId(
+            "lg5mhk:RK`YXt*QI;vEX",
+        ): Broadcast {
+            name: "message1",
+        },
+    },
+}

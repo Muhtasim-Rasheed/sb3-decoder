@@ -1,0 +1,441 @@
+---
+source: src/tests/raw_deserialization.rs
+expression: deserialized
+---
+Project {
+    targets: [
+        Target {
+            is_stage: true,
+            name: "Stage",
+            variables: {
+                "`jEk@4|i[#Fk?(8x)AV.-my variable": Variable(
+                    "my variable",
+                    Number(0),
+                    false,
+                ),
+            },
+            lists: {
+                "BxqRFYBnc|yT5gUeHa86": List(
+                    "asdf",
+                    [
+                        Number(2),
+                    ],
+                ),
+            },
+            broadcasts: {
+                "`i.fgKENM_}bxFAS2$#{": "message1",
+            },
+            blocks: {},
+            current_costume: 0,
+            costumes: [
+                Costume {
+                    name: "backdrop1",
+                    bitmap_resolution: None,
+                    data_format: "svg",
+                    asset_id: "cd21514d0531fdffb22204e0ec5ed84a",
+                    md5ext: "cd21514d0531fdffb22204e0ec5ed84a.svg",
+                    rotation_center_x: 240.0,
+                    rotation_center_y: 180.0,
+                },
+            ],
+            sounds: [],
+            volume: 100.0,
+            layer_order: 0,
+            visible: true,
+            x: 0.0,
+            y: 0.0,
+            size: 100.0,
+            direction: 90.0,
+            draggable: false,
+            rotation_style: None,
+        },
+        Target {
+            is_stage: false,
+            name: "Sprite1",
+            variables: {},
+            lists: {},
+            broadcasts: {},
+            blocks: {
+                "a": Full(
+                    FullBlock {
+                        opcode: "looks_sayforsecs",
+                        next: Some(
+                            "c",
+                        ),
+                        parent: Some(
+                            "d",
+                        ),
+                        inputs: {
+                            "MESSAGE": Input(
+                                3,
+                                Block(
+                                    "g",
+                                ),
+                                Some(
+                                    Primitive(
+                                        [
+                                            Number(10),
+                                            String("Hello!"),
+                                        ],
+                                    ),
+                                ),
+                            ),
+                            "SECS": Input(
+                                1,
+                                Primitive(
+                                    [
+                                        Number(4),
+                                        String("2"),
+                                    ],
+                                ),
+                                None,
+                            ),
+                        },
+                        fields: {},
+                        shadow: false,
+                        top_level: false,
+                        x: None,
+                        y: None,
+                        mutation: None,
+                    },
+                ),
+                "b": Full(
+                    FullBlock {
+                        opcode: "procedures_prototype",
+                        next: None,
+                        parent: Some(
+                            "d",
+                        ),
+                        inputs: {
+                            "Dv%_HLq(]#yp3,pRX-#6": Input(
+                                1,
+                                Block(
+                                    "f",
+                                ),
+                                None,
+                            ),
+                            "Nk@CLK%naJCc6bdwEKY]": Input(
+                                1,
+                                Block(
+                                    "e",
+                                ),
+                                None,
+                            ),
+                        },
+                        fields: {},
+                        shadow: true,
+                        top_level: false,
+                        x: None,
+                        y: None,
+                        mutation: Some(
+                            Mutation {
+                                tag_name: "mutation",
+                                children: [],
+                                proccode: Some(
+                                    "testblock %s %b",
+                                ),
+                                argumentids: Some(
+                                    "[\"Nk@CLK%naJCc6bdwEKY]\",\"Dv%_HLq(]#yp3,pRX-#6\"]",
+                                ),
+                                argumentnames: Some(
+                                    "[\"number or text\",\"boolean\"]",
+                                ),
+                                argumentdefaults: Some(
+                                    "[\"\",\"false\"]",
+                                ),
+                                warp: Some(
+                                    "true",
+                                ),
+                                hasnext: None,
+                            },
+                        ),
+                    },
+                ),
+                "c": Full(
+                    FullBlock {
+                        opcode: "looks_sayforsecs",
+                        next: Some(
+                            "h",
+                        ),
+                        parent: Some(
+                            "a",
+                        ),
+                        inputs: {
+                            "MESSAGE": Input(
+                                3,
+                                Block(
+                                    "i",
+                                ),
+                                Some(
+                                    Primitive(
+                                        [
+                                            Number(10),
+                                            String("Hello!"),
+                                        ],
+                                    ),
+                                ),
+                            ),
+                            "SECS": Input(
+                                1,
+                                Primitive(
+                                    [
+                                        Number(4),
+                                        String("2"),
+                                    ],
+                                ),
+                                None,
+                            ),
+                        },
+                        fields: {},
+                        shadow: false,
+                        top_level: false,
+                        x: None,
+                        y: None,
+                        mutation: None,
+                    },
+                ),
+                "d": Full(
+                    FullBlock {
+                        opcode: "procedures_definition",
+                        next: Some(
+                            "a",
+                        ),
+                        parent: None,
+                        inputs: {
+                            "custom_block": Input(
+                                1,
+                                Block(
+                                    "b",
+                                ),
+                                None,
+                            ),
+                        },
+                        fields: {},
+                        shadow: false,
+                        top_level: true,
+                        x: Some(
+                            243.0,
+                        ),
+                        y: Some(
+                            271.0,
+                        ),
+                        mutation: None,
+                    },
+                ),
+                "e": Full(
+                    FullBlock {
+                        opcode: "argument_reporter_string_number",
+                        next: None,
+                        parent: Some(
+                            "b",
+                        ),
+                        inputs: {},
+                        fields: {
+                            "VALUE": Field(
+                                "number or text",
+                                None,
+                            ),
+                        },
+                        shadow: true,
+                        top_level: false,
+                        x: None,
+                        y: None,
+                        mutation: None,
+                    },
+                ),
+                "f": Full(
+                    FullBlock {
+                        opcode: "argument_reporter_boolean",
+                        next: None,
+                        parent: Some(
+                            "b",
+                        ),
+                        inputs: {},
+                        fields: {
+                            "VALUE": Field(
+                                "boolean",
+                                None,
+                            ),
+                        },
+                        shadow: true,
+                        top_level: false,
+                        x: None,
+                        y: None,
+                        mutation: None,
+                    },
+                ),
+                "g": Full(
+                    FullBlock {
+                        opcode: "argument_reporter_string_number",
+                        next: None,
+                        parent: Some(
+                            "a",
+                        ),
+                        inputs: {},
+                        fields: {
+                            "VALUE": Field(
+                                "number or text",
+                                None,
+                            ),
+                        },
+                        shadow: false,
+                        top_level: false,
+                        x: None,
+                        y: None,
+                        mutation: None,
+                    },
+                ),
+                "h": Full(
+                    FullBlock {
+                        opcode: "control_stop",
+                        next: None,
+                        parent: Some(
+                            "c",
+                        ),
+                        inputs: {},
+                        fields: {
+                            "STOP_OPTION": Field(
+                                "all",
+                                None,
+                            ),
+                        },
+                        shadow: false,
+                        top_level: false,
+                        x: None,
+                        y: None,
+                        mutation: Some(
+                            Mutation {
+                                tag_name: "mutation",
+                                children: [],
+                                proccode: None,
+                                argumentids: None,
+                                argumentnames: None,
+                                argumentdefaults: None,
+                                warp: None,
+                                hasnext: Some(
+                                    "false",
+                                ),
+                            },
+                        ),
+                    },
+                ),
+                "i": Full(
+                    FullBlock {
+                        opcode: "argument_reporter_boolean",
+                        next: None,
+                        parent: Some(
+                            "c",
+                        ),
+                        inputs: {},
+                        fields: {
+                            "VALUE": Field(
+                                "boolean",
+                                None,
+                            ),
+                        },
+                        shadow: false,
+                        top_level: false,
+                        x: None,
+                        y: None,
+                        mutation: None,
+                    },
+                ),
+                "j": Full(
+                    FullBlock {
+                        opcode: "procedures_call",
+                        next: None,
+                        parent: None,
+                        inputs: {
+                            "Dv%_HLq(]#yp3,pRX-#6": Input(
+                                2,
+                                Block(
+                                    "k",
+                                ),
+                                None,
+                            ),
+                            "Nk@CLK%naJCc6bdwEKY]": Input(
+                                1,
+                                Primitive(
+                                    [
+                                        Number(10),
+                                        String("10"),
+                                    ],
+                                ),
+                                None,
+                            ),
+                        },
+                        fields: {},
+                        shadow: false,
+                        top_level: true,
+                        x: Some(
+                            449.0,
+                        ),
+                        y: Some(
+                            526.0,
+                        ),
+                        mutation: Some(
+                            Mutation {
+                                tag_name: "mutation",
+                                children: [],
+                                proccode: Some(
+                                    "testblock %s %b",
+                                ),
+                                argumentids: Some(
+                                    "[\"Nk@CLK%naJCc6bdwEKY]\",\"Dv%_HLq(]#yp3,pRX-#6\"]",
+                                ),
+                                argumentnames: None,
+                                argumentdefaults: None,
+                                warp: Some(
+                                    "true",
+                                ),
+                                hasnext: None,
+                            },
+                        ),
+                    },
+                ),
+                "k": Full(
+                    FullBlock {
+                        opcode: "operator_not",
+                        next: None,
+                        parent: Some(
+                            "j",
+                        ),
+                        inputs: {},
+                        fields: {},
+                        shadow: false,
+                        top_level: false,
+                        x: None,
+                        y: None,
+                        mutation: None,
+                    },
+                ),
+            },
+            current_costume: 0,
+            costumes: [
+                Costume {
+                    name: "costume1",
+                    bitmap_resolution: Some(
+                        1.0,
+                    ),
+                    data_format: "svg",
+                    asset_id: "927d672925e7b99f7813735c484c6922",
+                    md5ext: "927d672925e7b99f7813735c484c6922.svg",
+                    rotation_center_x: 30.74937882782359,
+                    rotation_center_y: 58.864768144346826,
+                },
+            ],
+            sounds: [],
+            volume: 100.0,
+            layer_order: 1,
+            visible: true,
+            x: 0.0,
+            y: 0.0,
+            size: 100.0,
+            direction: 90.0,
+            draggable: false,
+            rotation_style: Some(
+                "all around",
+            ),
+        },
+    ],
+}
