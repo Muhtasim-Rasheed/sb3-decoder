@@ -113,8 +113,14 @@ pub enum Error {
     #[error("invalid math function selection: {0}")]
     InvalidMathFunc(String),
 
+    #[error("invalid pen color parameter: {0}")]
+    InvalidPenColorParam(String),
+
     #[error("invalid block mutation")]
     InvalidMutation,
+
+    #[error("invalid extension: {0}")]
+    InvalidExtension(String),
 
     #[error("more than one stage found")]
     MultipleStages,

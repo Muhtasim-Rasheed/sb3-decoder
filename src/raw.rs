@@ -10,6 +10,7 @@ use serde_json::Value as Json;
 #[derive(Debug, Deserialize)]
 pub struct Project {
     pub targets: Vec<Target>,
+    pub extensions: Vec<String>,
 }
 
 #[serde_inline_default]

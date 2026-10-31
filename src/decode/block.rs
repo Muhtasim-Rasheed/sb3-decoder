@@ -350,6 +350,22 @@ impl<'a, 'b> Lowerer<'a, 'b> {
 
             "procedures_call" => self.call(b, depth)?,
 
+            "pen_clear" => A::EraseAll,
+            "pen_stamp" => A::Stamp,
+            "pen_penDown" => A::PenDown,
+            "pen_penUp" => A::PenUp,
+            "pen_setPenColorToColor" => A::SetPenColor { color: i!(COLOR) },
+            "pen_changePenColorParamBy" => A::ChangePenColorParamBy {
+                param: i!(COLOR_PARAM),
+                inc: i!(VALUE),
+            },
+            "pen_setPenColorParamTo" => A::SetPenColorParamTo {
+                param: i!(COLOR_PARAM),
+                val: i!(VALUE),
+            },
+            "pen_changePenSizeBy" => A::ChangePenSizeBy { inc: i!(SIZE) },
+            "pen_setPenSizeTo" => A::SetPenSizeTo { val: i!(SIZE) },
+
             _ => {
                 return Ok(None);
             }
@@ -562,6 +578,10 @@ impl<'a, 'b> Lowerer<'a, 'b> {
             "argument_reporter_string_number" | "argument_reporter_boolean" => {
                 R::Argument { name: f!(VALUE) }
             }
+
+            "pen_menu_colorParam" => R::PenColorParam {
+                param: f!(colorParam).parse()?,
+            },
 
             _ => return Ok(None),
         }))
@@ -940,6 +960,22 @@ impl std::str::FromStr for model::blocks::MathFuncField {
             "log" => Ok(M::Log),
             "e ^" => Ok(M::EToPower),
             "10 ^" => Ok(M::TenToPower),
+            _ => Err(Error::InvalidMathFunc(s.to_string())),
+        }
+    }
+}
+
+impl std::str::FromStr for model::blocks::PenColorParam {
+    type Err = Error;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        use model::blocks::PenColorParam as P;
+
+        match s {
+            "color" => Ok(P::Color),
+            "saturation" => Ok(P::Saturation),
+            "brightness" => Ok(P::Brightness),
+            "transparency" => Ok(P::Transparency),
             _ => Err(Error::InvalidMathFunc(s.to_string())),
         }
     }

@@ -140,6 +140,17 @@ pub enum Action {
     // Procedures
     CallProcedure { proccode: String, args: Vec<Reporter> },
 
+    // Pen extension
+    EraseAll,
+    Stamp,
+    PenDown,
+    PenUp,
+    SetPenColor { color: Reporter },
+    ChangePenColorParamBy { param: Reporter, inc: Reporter },
+    SetPenColorParamTo { param: Reporter, val: Reporter },
+    ChangePenSizeBy { inc: Reporter },
+    SetPenSizeTo { val: Reporter },
+
     // Unknown
     Unknown(UnknownBlock),
 }
@@ -247,6 +258,9 @@ pub enum Reporter {
 
     // Procedures
     Argument { name: String },
+
+    // Pen extension
+    PenColorParam { param: PenColorParam },
 
     // Unknown
     Unknown(UnknownBlock),
@@ -476,7 +490,7 @@ pub enum CloneOfMenu {
     Sprite(String),
 }
 
-/// The math function field used by `([math-func] of (x))`
+/// The math function field used by `([math-func] of (x))`.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum MathFuncField {
     Abs,
@@ -493,4 +507,17 @@ pub enum MathFuncField {
     Log,
     EToPower,
     TenToPower,
+}
+
+/// The pen color parameter used by some pen extension blocks.
+///
+/// Specifically:
+/// - `change pen [parameter] by (inc)`
+/// - `set pen [parameter] to (value)`
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+pub enum PenColorParam {
+    Color,
+    Saturation,
+    Brightness,
+    Transparency,
 }

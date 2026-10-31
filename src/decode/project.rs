@@ -13,11 +13,23 @@ pub fn decode_project(raw: raw::Project, ctx: DecodeCtx<'_>) -> Result<model::Pr
         &mut broadcasts,
         ctx,
     )?;
+    let extensions = raw
+        .extensions
+        .into_iter()
+        .map(|e| {
+            use model::project::Extension as E;
+            match e.as_str() {
+                "pen" => Ok(E::Pen),
+                _ => Err(Error::InvalidExtension(e)),
+            }
+        })
+        .collect::<Result<_, _>>()?;
     Ok(model::Project {
         sprites,
         stage,
         global_variables,
         global_lists,
         broadcasts,
+        extensions,
     })
 }
