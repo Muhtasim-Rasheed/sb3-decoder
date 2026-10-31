@@ -373,6 +373,11 @@ impl<'a, 'b> Lowerer<'a, 'b> {
                 field(b, stringify!($name))?
             };
         }
+        macro_rules! f_id {
+            ($name:ident, $ty:ident) => {
+                field_id(b, stringify!($name)).map(<model::$ty>::new)?
+            };
+        }
 
         Ok(Some(match b.opcode.as_str() {
             "motion_goto_menu" | "motion_glideto_menu" => R::LocationMenu {
@@ -465,6 +470,7 @@ impl<'a, 'b> Lowerer<'a, 'b> {
                 current: f!(CURRENTMENU).parse()?,
             },
             "sensing_dayssince2000" => R::DaysSince2000,
+            "sensing_online" => R::Online,
             "sensing_username" => R::Username,
 
             "operator_add" => R::Add {
@@ -495,7 +501,7 @@ impl<'a, 'b> Lowerer<'a, 'b> {
                 a: i!(OPERAND1),
                 b: i!(OPERAND2),
             },
-            "operator_eq" => R::Eq {
+            "operator_equals" => R::Eq {
                 a: i!(OPERAND1),
                 b: i!(OPERAND2),
             },
@@ -532,11 +538,27 @@ impl<'a, 'b> Lowerer<'a, 'b> {
             },
 
             "data_variable" => R::Variable {
-                var: field_id(b, "VARIABLE").map(model::VarId::new)?,
+                var: f_id!(VARIABLE, VarId),
             },
             "data_listcontents" => R::List {
-                list: field_id(b, "LIST").map(model::ListId::new)?,
+                list: f_id!(LIST, ListId),
             },
+            "data_itemoflist" => R::ItemOfList {
+                list: f_id!(LIST, ListId),
+                index: i!(INDEX),
+            },
+            "data_itemnumoflist" => R::ItemNumOfItemInList {
+                list: f_id!(LIST, ListId),
+                val: i!(ITEM),
+            },
+            "data_lengthoflist" => R::LengthOfList {
+                list: f_id!(LIST, ListId),
+            },
+            "data_listcontainsitem" => R::ListContains {
+                haystack: f_id!(LIST, ListId),
+                needle: i!(ITEM),
+            },
+
             "argument_reporter_string_number" | "argument_reporter_boolean" => {
                 R::Argument { name: f!(VALUE) }
             }

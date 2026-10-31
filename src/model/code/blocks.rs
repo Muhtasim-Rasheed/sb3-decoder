@@ -209,6 +209,7 @@ pub enum Reporter {
     Current { current: CurrentField },
     DaysSince2000,
 
+    Online,
     Username,
 
     // Operators
