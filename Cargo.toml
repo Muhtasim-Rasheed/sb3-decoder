@@ -1,6 +1,6 @@
 [package]
 name = "sb3-decoder"
-version = "0.2.0"
+version = "0.2.1"
 edition = "2024"
 authors = ["Muhtasim Noor Al Rasheed <mutasimos5101@gmail.com>"]
 description = "A Rust library for decoding Scratch 3.0 project files (.sb3)"
