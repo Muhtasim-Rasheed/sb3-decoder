@@ -26,3 +26,12 @@ fn decode_primitives_and_ids() {
         .unwrap();
     insta::assert_debug_snapshot!(decoded);
 }
+
+#[test]
+fn decode_pen() {
+    let decoded = Decoder::from_bytes(include_bytes!("fixtures/pen.sb3"))
+        .unwrap()
+        .decode()
+        .unwrap();
+    insta::assert_debug_snapshot!(decoded);
+}

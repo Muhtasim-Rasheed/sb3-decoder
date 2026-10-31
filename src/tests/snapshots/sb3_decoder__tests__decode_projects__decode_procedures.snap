@@ -130,4 +130,5 @@ Project {
     },
     global_lists: {},
     broadcasts: {},
+    extensions: {},
 }

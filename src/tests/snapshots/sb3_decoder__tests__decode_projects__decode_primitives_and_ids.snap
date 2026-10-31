@@ -222,4 +222,5 @@ Project {
             name: "message1",
         },
     },
+    extensions: {},
 }
